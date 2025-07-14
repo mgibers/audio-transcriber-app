@@ -72,3 +72,16 @@ button:disabled {
   font-weight: bold;
   color: #333;
 }
+
+.options {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.options label {
+  margin-left: 8px;
+  font-size: 0.9em;
+  color: #555;
+}

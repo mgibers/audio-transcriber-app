@@ -6,7 +6,8 @@ function App() {
   const [transcription, setTranscription] = useState('');
   const [isLoading, setIsLoading] = useState(false);
     const [testResult, setTestResult] = useState('');
-  const [cost, setCost] = useState(null);
+    const [cost, setCost] = useState(null);
+  const [isConversation, setIsConversation] = useState(false);
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -47,8 +48,9 @@ function App() {
     setTranscription('');
     setCost(null);
 
-    const formData = new FormData();
+        const formData = new FormData();
     formData.append('file', selectedFile);
+    formData.append('conversation_mode', isConversation);
 
     try {
       const response = await fetch('/transcribe', {
@@ -104,6 +106,16 @@ function App() {
           >
             {isLoading ? 'Transcribing...' : 'Transcribe'}
           </button>
+        </div>
+        <div className="options">
+          <input
+            type="checkbox"
+            id="conversationMode"
+            checked={isConversation}
+            onChange={(e) => setIsConversation(e.target.checked)}
+            disabled={isLoading}
+          />
+          <label htmlFor="conversationMode">Conversation Mode (Identify Speakers)</label>
         </div>
         {cost !== null && (
           <div className="cost-estimation">

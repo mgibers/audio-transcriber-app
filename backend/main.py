@@ -69,6 +69,11 @@ def transcribe_audio_chunk(chunk_path, chunk_index):
         logging.error(f"An unexpected error occurred during chunk {chunk_index} transcription: {e}")
         raise
 
+@app.get("/")
+async def root():
+    """Root endpoint."""
+    return {"message": "Audio Transcriber API", "status": "running", "endpoints": ["/api/ping", "/transcribe"]}
+
 @app.get("/api/ping")
 async def ping_endpoint():
     """Simple test endpoint to verify the API is working."""
